@@ -1,0 +1,75 @@
+{
+  "kind": "singleType",
+  "collectionName": "heroes",
+  "info": {
+    "singularName": "hero",
+    "pluralName": "heroes",
+    "displayName": "Hero"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "text",
+      "required": true
+    },
+    "badgeLabel": {
+      "type": "string"
+    },
+    "primaryButtonLabel": {
+      "type": "string"
+    },
+    "primaryButtonMessage": {
+      "type": "text",
+      "required": false
+    },
+    "secondaryButtonLabel": {
+      "type": "string"
+    },
+    "secondaryButtonHref": {
+      "type": "string"
+    },
+    "carouselLabel": {
+      "type": "string"
+    },
+    "backgroundType": {
+      "type": "enumeration",
+      "default": "color",
+      "enum": [
+        "image",
+        "color",
+        "gradient"
+      ]
+    },
+    "backgroundColor": {
+      "type": "string"
+    },
+    "gradientFrom": {
+      "type": "string"
+    },
+    "gradientTo": {
+      "type": "string"
+    },
+    "backgroundImage": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "trustItems": {
+      "type": "component",
+      "component": "hero.trust-item",
+      "repeatable": true
+    }
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "collectionName": "components_hero_trust_items",
+  "info": {
+    "displayName": "trust-item",
+    "icon": "star"
+  },
+  "options": {},
+  "attributes": {
+    "icon": {
+      "type": "enumeration",
+      "default": "shield",
+      "enum": [
+        "shield",
+        "star",
+        "users"
+      ]
+    },
+    "label": {
+      "type": "string",
+      "required": true
+    }
+  },
+  "config": {}
+}
