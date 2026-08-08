@@ -101,10 +101,11 @@
   --sunset-foreground: oklch(0.24 0.078 265);
   --leaf: oklch(0.58 0.089 152);
   --white-smoke: oklch(97.975% 0.01252 86.797);
+  --steelblue-semidark: oklch(0.47 0.09 233.85);
 
   --gradient-hero: linear-gradient(
     to top,
-    color-mix(in oklab, var(--primary) 92%, transparent) 6%,
+    color-mix(in oklab, var(--steelblue-semidark) 92%, transparent) 6%,
     color-mix(in oklab, var(--primary) 55%, transparent) 45%,
     color-mix(in oklab, var(--primary) 18%, transparent) 100%
   );
@@ -147,6 +148,7 @@
   --input: oklch(1 0 0 / 16%);
   --ring: oklch(0.66 0.098 200);
   --sand: oklch(0.28 0.062 265);
+  --steelblue-semidark: oklch(0.47 0.09 233.85);
 }
 
 @layer base {
