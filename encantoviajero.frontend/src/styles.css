@@ -43,6 +43,8 @@
   --color-lagoon-foreground: var(--lagoon-foreground);
   --color-sunset: var(--sunset);
   --color-sunset-foreground: var(--sunset-foreground);
+  --color-limegreen: var(--limegreen);
+  --color-limegreen-foreground: var(--limegreen-foreground);
   --color-leaf: var(--leaf);
   --color-chart-1: var(--chart-1);
   --color-chart-2: var(--chart-2);
@@ -77,7 +79,7 @@
   --primary: oklch(0.28 0.088 265);
   --primary-foreground: oklch(0.98 0.012 88);
 
-  --secondary: oklch(0.94 0.024 92);
+  --secondary: oklch(92.09% 0.00952 286.055);
   --secondary-foreground: oklch(0.28 0.088 265);
 
   --muted: oklch(0.95 0.018 90);
@@ -98,7 +100,9 @@
   --lagoon: oklch(0.66 0.098 200);
   --lagoon-foreground: oklch(0.99 0.008 200);
   --sunset: oklch(0.775 0.152 68);
+  --limegreen: oklch(77% .22 147.8);
   --sunset-foreground: oklch(0.24 0.078 265);
+  --limegreen-foreground:oklch(0.3 0.12 356.12);
   --leaf: oklch(0.58 0.089 152);
   --white-smoke: oklch(97.975% 0.01252 86.797);
   --steelblue-semidark: oklch(0.47 0.09 233.85);
@@ -110,7 +114,7 @@
     color-mix(in oklab, var(--primary) 18%, transparent) 100%
   );
   --gradient-sunset: linear-gradient(100deg, var(--sunset), oklch(0.83 0.13 82));
-  --gradient-limegreen:linear-gradient(100deg, oklch(0.91 0.07 145.6), oklch(0.97 0.08 134.44));
+  --gradient-limegreen:linear-gradient(100deg, oklch(0.77 0.22 147.8), oklch(0.89 0.15 134.6));
   --shadow-soft: 0 18px 40px -24px color-mix(in oklab, var(--primary) 45%, transparent);
   --shadow-lift: 0 28px 60px -28px color-mix(in oklab, var(--primary) 55%, transparent);
 

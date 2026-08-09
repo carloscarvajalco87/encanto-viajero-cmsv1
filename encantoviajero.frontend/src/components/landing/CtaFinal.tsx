@@ -1,4 +1,4 @@
-import { MessageCircle, ShieldCheck, Clock3, Instagram, Mail, Phone } from "lucide-react";
+import { MessageCircle, ShieldCheck, Clock3, Instagram, Mail, Phone, Facebook } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { whatsappLink } from "@/lib/site";
 import logo from "@/assets/encanto-viajero-logo.png";
@@ -87,11 +87,14 @@ export function SiteFooter() {
           >
             <Phone className="size-5" />
           </a>
-          <a href="#top" aria-label="Instagram" className="hover:text-primary-foreground">
+          <a href="https://www.instagram.com/encanto.viajero/" aria-label="Instagram" className="hover:text-primary-foreground" target="_blank" rel="noreferrer">
             <Instagram className="size-5" />
           </a>
+          <a href="https://www.facebook.com/mundoencantoviajero/" aria-label="Facebook" className="hover:text-primary-foreground" target="_blank" rel="noreferrer">
+            <Facebook className="size-5" />
+          </a>
           <a
-            href="mailto:hola@mundoencantoviajero.com"
+            href="mailto:info@mundoencantoviajero.com"
             aria-label="Email"
             className="hover:text-primary-foreground"
           >
@@ -112,7 +115,7 @@ export function WhatsAppFloat() {
       href={whatsappLink("¡Hola Encanto Viajero! Quiero cotizar una excursión.")}
       target="_blank"
       rel="noreferrer"
-      className="fixed bottom-5 right-5 z-50 inline-flex items-center gap-2 rounded-full bg-[image:var(--gradient-sunset)] px-5 py-3.5 text-sm font-semibold text-sunset-foreground shadow-[var(--shadow-lift)] transition-transform hover:scale-105"
+      className="fixed bottom-5 right-5 z-50 inline-flex items-center gap-2 rounded-full bg-[image:var(--gradient-limegreen)] px-5 py-3.5 text-sm font-semibold text-limegreen-foreground shadow-[var(--shadow-lift)] transition-transform hover:scale-105"
     >
       <MessageCircle className="size-5" />
       <span className="hidden sm:inline">Cotizar por WhatsApp</span>

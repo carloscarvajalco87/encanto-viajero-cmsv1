@@ -11,7 +11,7 @@ export function SiteHeader() {
   const { items: NAV } = useNavigation();
 
   return (
-    <header className="sticky top-0 z-50 border-b border-border/60 bg-background/85 backdrop-blur-md">
+    <header className="sticky top-0 z-50 border-b border-border/60 bg-foreground backdrop-blur-md">
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-5 py-3">
         <a href="#top" className="flex items-center gap-3">
           <img
@@ -21,11 +21,8 @@ export function SiteHeader() {
             height={48}
             className="h-11 w-11 rounded-full"
           />
-          <span className="leading-tight">
+          <span className="leading-tight text-background">
             <span className="block font-display text-lg font-semibold">Encanto Viajero</span>
-            <span className="block text-[0.7rem] uppercase tracking-[0.18em] text-muted-foreground">
-              Atrévete a vivir una nueva aventura
-            </span>
           </span>
         </a>
 
@@ -33,7 +30,7 @@ export function SiteHeader() {
           {NAV.map((item) =>
             item.submenu ? (
               <div key={item.label} className="group relative">
-                <button className="flex items-center gap-1 rounded-full px-4 py-2 text-sm font-medium text-foreground/80 transition-colors hover:bg-secondary hover:text-foreground">
+                <button className="flex items-center gap-1 rounded-full px-4 py-2 text-sm font-semibold text-background transition-colors hover:bg-secondary hover:text-foreground">
                   {item.label}
                   <ChevronDown className="size-4" />
                 </button>
@@ -54,7 +51,7 @@ export function SiteHeader() {
               <a
                 key={item.label}
                 href={item.href}
-                className="whitespace-nowrap rounded-full px-4 py-2 text-sm font-medium text-foreground/80 transition-colors hover:bg-secondary hover:text-foreground"
+                className="whitespace-nowrap rounded-full px-4 py-2 text-sm font-semibold text-background transition-colors hover:bg-secondary hover:text-foreground"
               >
                 {item.label}
               </a>
@@ -62,7 +59,7 @@ export function SiteHeader() {
           )}
         </nav>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 text-background">
           <Button variant="cta" size="lg" className="hidden rounded-full sm:inline-flex" asChild>
             <a
               href={whatsappLink("¡Hola Encanto Viajero! Quiero cotizar una excursión.")}
@@ -85,12 +82,12 @@ export function SiteHeader() {
       </div>
 
       {open && (
-        <div className="border-t border-border bg-background px-5 pb-5 pt-2 lg:hidden">
+        <div className="border-t border-border bg-foreground px-5 pb-5 pt-2 lg:hidden">
           {NAV.map((item) =>
             item.submenu ? (
               <div key={item.label}>
                 <button
-                  className="flex w-full items-center justify-between py-3 text-sm font-semibold"
+                  className="flex w-full items-center justify-between py-3 text-sm font-semibold text-background transition-colors hover:bg-secondary hover:text-foreground"
                   onClick={() => setSubOpen((v) => !v)}
                 >
                   {item.label} <ChevronDown className="size-4" />
@@ -102,7 +99,7 @@ export function SiteHeader() {
                         key={sub.label}
                         href={sub.href}
                         onClick={() => setOpen(false)}
-                        className="block py-2 text-sm text-muted-foreground"
+                        className="block py-2 text-sm text-background"
                       >
                         {sub.label}
                       </a>
@@ -115,7 +112,7 @@ export function SiteHeader() {
                 key={item.label}
                 href={item.href}
                 onClick={() => setOpen(false)}
-                className="block py-3 text-sm font-semibold"
+                className="block py-3 text-sm font-semibold text-background transition-colors hover:bg-secondary hover:text-foreground"
               >
                 {item.label}
               </a>

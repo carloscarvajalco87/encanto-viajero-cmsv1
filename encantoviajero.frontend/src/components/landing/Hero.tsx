@@ -48,7 +48,7 @@ export function Hero() {
         </>
       )}
 
-      <div className="mx-auto grid min-h-[88vh] max-w-8xl grid-cols-1 items-center gap-12 px-5 pb-14 pt-24 text-primary-foreground lg:grid-cols-[1.4fr_360px]">
+      <div className="mx-auto grid min-h-[75vh] max-w-8xl grid-cols-1 items-center gap-12 px-5 pb-14 pt-4 text-primary-foreground lg:grid-cols-[1.4fr_360px] md:pt-24">
         <div className="flex flex-col justify-end">
           <span className="mb-5 inline-flex w-fit items-center gap-2 rounded-full border border-primary-foreground/30 bg-primary-foreground/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.16em] backdrop-blur-sm">
             <Users className="size-3.5" /> {content.badgeLabel}
