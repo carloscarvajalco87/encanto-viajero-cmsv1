@@ -15,7 +15,7 @@ export const HERO_FALLBACK: HeroContent = {
   secondaryButtonLabel: "Ver experiencias",
   secondaryButtonHref: "#experiencias",
   carouselLabel: "Salidas de esta semana",
-  background: { type: "image", url: hero },
+  background: { type: "color", color: "#05023a" },
   trustItems: [
     { icon: "shield", label: "Cancelación flexible hasta 48 h antes" },
     { icon: "star", label: "4,9/5 en más de 480 viajes realizados" },

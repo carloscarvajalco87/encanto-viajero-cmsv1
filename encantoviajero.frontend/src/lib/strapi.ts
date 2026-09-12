@@ -31,7 +31,7 @@ export interface Experiencia {
   duracion: string;
   lugar: string;
   grupo: string;
-  precio: string;
+  precio: number;
   cupos: string;
   notas: string;
   notasPrecio: string;

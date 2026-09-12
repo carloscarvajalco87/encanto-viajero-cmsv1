@@ -3,7 +3,7 @@ import { Menu, X, ChevronDown, MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { whatsappLink } from "@/lib/site";
 import { useNavigation } from "@/hooks/use-navigation";
-import logo from "@/assets/encanto-viajero-logo.png";
+import logo from "@/assets/encanto-viajero-logov2.png";
 
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
@@ -11,15 +11,15 @@ export function SiteHeader() {
   const { items: NAV } = useNavigation();
 
   return (
-    <header className="sticky top-0 z-50 border-b border-border/60 bg-foreground backdrop-blur-md">
+    <header className="sticky top-0 z-50 border-b border-transparent bg-foreground backdrop-blur-md">
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-5 py-3">
         <a href="#top" className="flex items-center gap-3">
           <img
             src={logo}
             alt="Encanto Viajero"
-            width={48}
-            height={48}
-            className="h-11 w-11 rounded-full"
+            width={64}
+            height={64}
+            className="rounded-full"
           />
           <span className="leading-tight text-background">
             <span className="block font-display text-lg font-semibold">Encanto Viajero</span>

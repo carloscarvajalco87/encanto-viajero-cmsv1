@@ -121,7 +121,7 @@ export function Experiencias() {
                     <Users className="size-4 text-lagoon" /> {exp.grupo}
                   </li>
                 </ul>
-                <p className="mt-5 font-display text-lg">{exp.notasPrecio ? exp.notasPrecio.replace("$price", FormatoMoneda(Number(exp.precio))) : FormatoMoneda(Number(exp.precio))}</p>
+                <p className="mt-5 font-display text-lg">{exp.notasPrecio ? exp.notasPrecio.replace("$price", FormatoMoneda(exp.precio)) : FormatoMoneda(exp.precio)}</p>
                 <Button variant="cta" size="lg" className="mt-4 w-full rounded-full" asChild>
                   <a
                     href={whatsappLink(

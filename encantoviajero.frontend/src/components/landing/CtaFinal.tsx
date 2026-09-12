@@ -1,7 +1,8 @@
 import { MessageCircle, ShieldCheck, Clock3, Instagram, Mail, Phone, Facebook } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { whatsappLink } from "@/lib/site";
-import logo from "@/assets/encanto-viajero-logo.png";
+import logo from "@/assets/encanto-viajero-logov2.png";
+import whatsappIcon from "@/assets/whatsapp.svg";
 
 export function CtaFinal() {
   return (
@@ -115,10 +116,11 @@ export function WhatsAppFloat() {
       href={whatsappLink("¡Hola Encanto Viajero! Quiero cotizar una excursión.")}
       target="_blank"
       rel="noreferrer"
-      className="fixed bottom-5 right-5 z-50 inline-flex items-center gap-2 rounded-full bg-[image:var(--gradient-limegreen)] px-5 py-3.5 text-sm font-semibold text-limegreen-foreground shadow-[var(--shadow-lift)] transition-transform hover:scale-105"
+      title="Cotizar por WhatsApp"
+      aria-label="Cotizar por WhatsApp"
+      className="fixed bottom-5 right-5 z-50 size-24 overflow-hidden rounded-full shadow-[var(--shadow-lift)] transition-transform hover:scale-110"
     >
-      <MessageCircle className="size-5" />
-      <span className="hidden sm:inline">Cotizar por WhatsApp</span>
+      <img src={whatsappIcon} alt="" className="h-full w-full" />
     </a>
   );
 }

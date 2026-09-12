@@ -28,7 +28,7 @@ export interface Articulo {
   duration: string;
   location: string;
   capacity: string;
-  price: string;
+  price: number;
   notes: string;
   priceNote: string;
   availableSpots: string;

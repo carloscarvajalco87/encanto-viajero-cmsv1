@@ -1,0 +1,5 @@
+{
+  "typescript.tsdk": "encantoviajero.frontend/node_modules/typescript/lib",
+  "typescript.enablePromptUseWorkspaceTsdk": true,
+  "js/ts.tsdk.path": "encantoviajero.frontend/node_modules/typescript/lib"
+}

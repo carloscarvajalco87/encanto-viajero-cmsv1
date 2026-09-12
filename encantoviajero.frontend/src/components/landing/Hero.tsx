@@ -1,6 +1,7 @@
 import type { CSSProperties } from "react";
 import { MessageCircle, ShieldCheck, Users, Star, type LucideIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Skeleton } from "@/components/ui/skeleton";
 import { whatsappLink } from "@/lib/site";
 import { useHero } from "@/hooks/use-hero";
 import { HeroCarousel } from "@/components/landing/HeroCarousel";
@@ -16,7 +17,7 @@ const TRUST_ICONS: Record<TrustIcon, LucideIcon> = {
 function backgroundStyle(background: HeroBackground): CSSProperties {
   if (background.type === "gradient") {
     return {
-      backgroundImage: `linear-gradient(160deg, ${background.from}, ${background.to})`,
+      backgroundImage: `linear-gradient(to top, ${background.from} 6%, ${background.to} 45%)`,
     };
   }
   if (background.type === "color") {
@@ -25,8 +26,57 @@ function backgroundStyle(background: HeroBackground): CSSProperties {
   return {};
 }
 
+function HeroSkeleton() {
+  return (
+    <section id="top" className="relative isolate overflow-hidden bg-muted" style={{ backgroundImage: `linear-gradient(to top, rgb(21, 98, 133) 6%, rgb(18, 34, 70) 45%)` }}>
+      <div className="mx-auto grid min-h-[75vh] max-w-8xl grid-cols-1 items-center gap-12 px-5 pb-14 pt-4 lg:grid-cols-[1.4fr_360px] md:pt-24">
+        <div className="flex flex-col justify-end gap-5">
+          <Skeleton className="h-7 w-56 rounded-full" theme="secondary/40" />
+
+          <div className="space-y-3">
+            <Skeleton className="h-10 w-full max-w-2xl" theme="secondary/40" />
+            <Skeleton className="h-10 w-full max-w-xl" theme="secondary/40" />
+            <Skeleton className="h-10 w-2/3 max-w-md" theme="secondary/40" />
+          </div>
+
+          <div className="space-y-2">
+            <Skeleton className="h-4 w-full max-w-2xl" theme="secondary/40" />
+            <Skeleton className="h-4 w-full max-w-xl" theme="secondary/40" />
+            <Skeleton className="h-4 w-3/4 max-w-lg" theme="secondary/40" />
+          </div>
+
+          <div className="mt-3 flex flex-col gap-3 sm:flex-row sm:items-center">
+            <Skeleton className="h-12 w-56 rounded-full" theme="secondary/40" />
+            <Skeleton className="h-12 w-40 rounded-full" theme="secondary/40" />
+          </div>
+
+          <div className="mt-6 flex flex-wrap gap-x-7 gap-y-3">
+            <Skeleton className="h-4 w-52" theme="secondary/40" />
+            <Skeleton className="h-4 w-48" theme="secondary/40" />
+            <Skeleton className="h-4 w-56" theme="secondary/40" />
+          </div>
+        </div>
+
+        <div className="mx-auto w-full max-w-xs lg:mx-0">
+          <Skeleton className="mb-4 h-7 w-40 rounded-full" theme="secondary/40" />
+          <Skeleton className="aspect-[0.7] w-full rounded-lg" theme="secondary/40" />
+          <div className="mt-4 flex justify-center gap-2">
+            <Skeleton className="h-2 w-5 rounded-full" theme="secondary/40" />
+            <Skeleton className="h-2 w-2 rounded-full" theme="secondary/40" />
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 export function Hero() {
-  const { content, slides } = useHero();
+  const { content, slides, isLoading } = useHero();
+
+  if (isLoading) {
+    return <HeroSkeleton />;
+  }
+
   const { background } = content;
 
   return (

@@ -7,9 +7,9 @@ import { Opiniones } from "@/components/landing/Opiniones";
 import { Faq } from "@/components/landing/Faq";
 import { CtaFinal, SiteFooter, WhatsAppFloat } from "@/components/landing/CtaFinal";
 
-const title = "Encanto Viajero | Excursiones y turismo rural personalizado";
+const title = "Encanto Viajero | Paquetes turísticos a Cartagena y Coveñas desde Medellín ";
 const description =
-  "Excursiones, turismo rural y ecoturismo 100% personalizados en grupos reducidos. Guías locales, precios claros y cancelación flexible. Cotizá por WhatsApp.";
+  "Descubre planes turísticos desde Medellín a destinos de playa, naturaleza y aventura. Conoce nuestros paquetes, excursiones y pasadías. Conoce nuestros planes, servicios incluidos y solicita tu cotización por WhatsApp.";
 
 export const Route = createFileRoute("/")({
   head: () => ({
