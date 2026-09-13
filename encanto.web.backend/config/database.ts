@@ -42,8 +42,18 @@ const config = ({ env }: Core.Config.Shared.ConfigParams): Core.Config.Database 
           cipher: env('DATABASE_SSL_CIPHER', undefined),
           rejectUnauthorized: env.bool('DATABASE_SSL_REJECT_UNAUTHORIZED', true),
         },
+        // Shared-hosting MySQL servers commonly close idle connections after
+        // their own wait_timeout, or a NAT/proxy in front of them drops idle
+        // TCP sockets silently. TCP keep-alive detects that at the socket
+        // level instead of only finding out via an ECONNRESET on next query.
+        enableKeepAlive: true,
+        keepAliveInitialDelay: 10000,
       },
-      pool: { min: env.int('DATABASE_POOL_MIN', 2), max: env.int('DATABASE_POOL_MAX', 10) },
+      // min: 0 means idle connections aren't kept around indefinitely to go
+      // stale — a fresh one is opened on demand instead of handing out one
+      // the DB server may have already closed after a period of no traffic
+      // (this is what caused the intermittent ECONNRESET on first request).
+      pool: { min: env.int('DATABASE_POOL_MIN', 0), max: env.int('DATABASE_POOL_MAX', 10) },
     },
     postgres: {
       client: 'postgres',
