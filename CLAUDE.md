@@ -33,22 +33,22 @@ Architecture:
 
 ## Frontend (`encantoviajero.frontend/`)
 
-Package manager: **bun** (`bun.lock` + `bunfig.toml` are the source of truth; ignore/remove stray `package-lock.json` rather than trusting it).
+Package manager: **npm** (`package-lock.json` is the source of truth).
 
 Commands:
-- `bun run dev` — Vite dev server (TanStack Start SSR).
-- `bun run build` / `bun run build:dev` — production / development-mode build.
-- `bun run preview` — preview a production build.
-- `bun run lint` — ESLint (flat config, `eslint.config.js`).
-- `bun run format` — Prettier, writes in place.
+- `npm run dev` — Vite dev server (TanStack Start SSR), on port 8080.
+- `npm run build` / `npm run build:dev` — production / development-mode build. Output lands in `.output/` (`.output/public` static assets, `.output/server/index.mjs` the Node server entry point) — not `dist/`.
+- `npm run preview` — preview a production build.
+- `npm run lint` — ESLint (flat config, `eslint.config.js`).
+- `npm run format` — Prettier, writes in place.
 
 There is no test suite configured for this project.
 
 Environment: `VITE_STRAPI_URL` points at the Strapi backend (defaults to `http://localhost:1337` if unset — see `src/lib/strapi.ts`). No `.env` file is committed; create one locally if pointing at a non-default backend.
 
 Architecture:
-- Built with `@lovable.dev/vite-tanstack-config` — this wraps and injects TanStack devtools, `tanstackStart`, `viteReact`, Tailwind, `tsConfigPaths`, Nitro (Cloudflare target by default), and React/TanStack dedupe. Do not re-add any of those plugins manually in `vite.config.ts`; only pass extra options through `defineConfig({ vite: {...} })`.
-- This project is connected to **Lovable** (see `AGENTS.md`): avoid force-pushing or rewriting published history on the synced branch (no `rebase`/`amend`/`squash` of already-pushed commits) — that breaks history sync back to the Lovable editor. Regular new commits pushed to the connected branch sync fine.
+- Plain Vite config (`vite.config.ts`) — no wrapper package. Plugins configured directly: `@vitejs/plugin-react`, `@tailwindcss/vite`, `vite-tsconfig-paths`, `@tanstack/react-start/plugin/vite`, and `nitro/vite` (build-only, forced to `preset: "node-server"` since this deploys to Hostinger's generic Node.js hosting, not Cloudflare — the package's own default preset is Cloudflare Workers, which Hostinger's Node runtime cannot execute).
+- This project is **not** connected to Lovable — it was originally scaffolded with `@lovable.dev/vite-tanstack-config` and synced to the Lovable editor; both have since been removed (including `AGENTS.md`, which only documented that sync) in favor of the plain Vite setup above.
 - Routing is file-based via TanStack Router (`src/routes/`). `src/routes/__root.tsx` sets up the HTML shell, global `<head>` meta/fonts, the React Query provider, and shared not-found/error boundaries; `src/routes/index.tsx` composes the landing page sections in order (`SiteHeader`, `Hero`, `Experiencias`, `Emocional`/`PorQueElegirnos`, `Opiniones`, `Faq`, `CtaFinal`, `SiteFooter`, `WhatsAppFloat`).
 - Data-fetching/mapping lives in `src/lib/` as one module per Strapi resource (`strapi.ts`, `hero.ts`, `navigation.ts`, `site.ts`, `rich-text.ts`). The pattern throughout: define the resource's populate-tuned endpoint URL, fetch the raw Strapi shape (typed in `src/types/`), then map it to the plain view-model shape the existing landing components already expect — so Strapi/API changes stay isolated to the `lib` mapper instead of rippling into JSX.
 - Each `lib` module's fallback constants (e.g. `NAV_FALLBACK` in `site.ts`, `hero-fallback.ts`) exist so sections never render empty/broken if Strapi is unreachable or a request fails — preserve this fallback pattern when adding new Strapi-backed sections.
