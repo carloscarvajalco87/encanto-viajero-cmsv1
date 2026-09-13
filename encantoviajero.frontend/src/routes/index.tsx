@@ -7,9 +7,9 @@ import { Opiniones } from "@/components/landing/Opiniones";
 import { Faq } from "@/components/landing/Faq";
 import { CtaFinal, SiteFooter, WhatsAppFloat } from "@/components/landing/CtaFinal";
 
-const title = "Encanto Viajero | Paquetes turísticos a Cartagena y Coveñas desde Medellín ";
+const title = "Encanto Viajero | Paquetes turísticos a Coveñas desde Medellín";
 const description =
-  "Descubre planes turísticos desde Medellín a destinos de playa, naturaleza y aventura. Conoce nuestros paquetes, excursiones y pasadías. Conoce nuestros planes, servicios incluidos y solicita tu cotización por WhatsApp.";
+  "Descubre planes turísticos desde Medellín a destinos de playa, naturaleza y aventura. Conoce nuestros planes y solicita tu cotización por WhatsApp.";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -21,6 +21,7 @@ export const Route = createFileRoute("/")({
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
+    links: [{ rel: "canonical", href: "https://mundoencantoviajero.com/" }],
   }),
   component: Index,
 });

@@ -120,7 +120,7 @@ export function WhatsAppFloat() {
       aria-label="Cotizar por WhatsApp"
       className="fixed bottom-5 right-5 z-50 size-24 overflow-hidden rounded-full shadow-[var(--shadow-lift)] transition-transform hover:scale-110"
     >
-      <img src={whatsappIcon} alt="" className="h-full w-full" />
+      <img src={whatsappIcon} alt="Icono de whatsapp" className="h-full w-full" />
     </a>
   );
 }
