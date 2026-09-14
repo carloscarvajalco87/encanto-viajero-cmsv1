@@ -8,7 +8,7 @@ const config = ({ env }: Core.Config.Shared.ConfigParams): Core.Config.Middlewar
     name: 'strapi::cors',
     config: {
       origin: env.array('CORS_ORIGIN', [
-        'http://localhost:3000',
+        'http://localhost:8080',
         'https://mundoencantoviajero.com',
         'https://www.mundoencantoviajero.com',
       ]),

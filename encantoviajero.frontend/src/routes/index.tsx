@@ -21,7 +21,7 @@ export const Route = createFileRoute("/")({
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
-    links: [{ rel: "canonical", href: "https://mundoencantoviajero.com/" }],
+    links: [{ rel: "canonical", href: "https://www.mundoencantoviajero.com/" }],
   }),
   component: Index,
 });
