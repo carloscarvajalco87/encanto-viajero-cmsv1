@@ -88,13 +88,27 @@ export function Hero({ initialData }: { initialData?: HeroInitialData }) {
     >
       {background.type === "image" && (
         <>
-          <img
-            src={background.url}
-            alt=""
-            width={1920}
-            height={1200}
-            className="absolute inset-0 -z-20 h-full w-full object-cover"
-          />
+          <picture>
+            {/* Dirección de arte: en móvil (< md, 768px) se usa la versión vertical si existe. */}
+            {background.mobile && (
+              <source
+                media="(max-width: 767px)"
+                srcSet={background.mobile.srcSet ?? background.mobile.url}
+                sizes="100vw"
+              />
+            )}
+            <img
+              src={background.url}
+              srcSet={background.srcSet}
+              sizes="100vw"
+              alt=""
+              width={1920}
+              height={1200}
+              fetchPriority="high"
+              decoding="async"
+              className="absolute inset-0 -z-20 h-full w-full object-cover"
+            />
+          </picture>
           <div className="hero-overlay absolute inset-0 -z-10" />
         </>
       )}

@@ -1,5 +1,5 @@
 // src/lib/hero.ts
-import { getStrapiMediaUrl, STRAPI_URL } from "@/lib/strapi";
+import { getStrapiImageSources, STRAPI_URL } from "@/lib/strapi";
 import type { Hero, HeroSlide, TrustIcon } from "@/types/hero";
 
 // `trustItems` es un component repetible de primer nivel (no está anidado
@@ -11,7 +11,13 @@ export const HERO_ENDPOINT = `${STRAPI_URL}/api/hero?populate=*`;
 export const HERO_SLIDES_ENDPOINT = `${STRAPI_URL}/api/hero-slides?sort=order:asc&populate=*`;
 
 export type HeroBackground =
-  | { type: "image"; url: string }
+  | {
+      type: "image";
+      url: string;
+      srcSet?: string;
+      /** Imagen vertical alternativa para pantallas móviles (dirección de arte). */
+      mobile?: { url: string; srcSet?: string };
+    }
   | { type: "color"; color: string }
   | { type: "gradient"; from: string; to: string };
 
@@ -36,6 +42,7 @@ export interface HeroContent {
 export interface HeroSlideView {
   id: number;
   image: string;
+  srcSet?: string;
   alt: string;
   departureTime?: string;
   location?: string;
@@ -50,7 +57,18 @@ export interface HeroSlideView {
  */
 function resolveBackground(hero: Hero): HeroBackground {
   if (hero.backgroundType === "image" && hero.backgroundImage) {
-    return { type: "image", url: getStrapiMediaUrl(hero.backgroundImage.url) };
+    const { src, srcSet } = getStrapiImageSources(hero.backgroundImage, "large");
+    const mobile = hero.backgroundImageMobile
+      ? getStrapiImageSources(hero.backgroundImageMobile, "medium")
+      : null;
+    return {
+      type: "image",
+      url: src,
+      ...(srcSet ? { srcSet } : {}),
+      ...(mobile
+        ? { mobile: { url: mobile.src, ...(mobile.srcSet ? { srcSet: mobile.srcSet } : {}) } }
+        : {}),
+    };
   }
 
   if (hero.backgroundType === "gradient" && hero.gradientFrom && hero.gradientTo) {
@@ -80,9 +98,11 @@ export function mapHeroToContent(hero: Hero): HeroContent {
 }
 
 export function mapHeroSlide(slide: HeroSlide): HeroSlideView {
+  const { src, srcSet } = getStrapiImageSources(slide.image);
   return {
     id: slide.id,
-    image: getStrapiMediaUrl(slide.image?.url),
+    image: src,
+    ...(srcSet ? { srcSet } : {}),
     alt: slide.imageAlt ?? slide.image?.alternativeText ?? "",
     ...(slide.departureTime ? { departureTime: slide.departureTime } : {}),
     ...(slide.location ? { location: slide.location } : {}),

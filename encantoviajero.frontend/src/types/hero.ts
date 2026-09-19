@@ -27,6 +27,12 @@ export interface Hero {
   backgroundType: HeroBackgroundType;
   /** Solo se usa cuando backgroundType = "image". */
   backgroundImage: StrapiMedia | null;
+  /**
+   * Versión vertical para pantallas móviles. Opcional: si no se sube, en móvil
+   * se usa `backgroundImage`. Puede faltar en la respuesta si el backend aún
+   * no tiene el campo.
+   */
+  backgroundImageMobile?: StrapiMedia | null;
   /** Hex, ej. "#0f3d2e". Solo se usa cuando backgroundType = "color". */
   backgroundColor: string | null;
   /** Hex. Solo se usan cuando backgroundType = "gradient". */

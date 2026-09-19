@@ -66,6 +66,13 @@
         "audios"
       ]
     },
+    "backgroundImageMobile": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
     "trustItems": {
       "type": "component",
       "component": "hero.trust-item",

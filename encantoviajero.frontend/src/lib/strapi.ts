@@ -1,5 +1,6 @@
 // src/lib/strapi.ts
 import type { Articulo } from "@/types/articulo";
+import type { StrapiMedia, StrapiMediaFormatName } from "@/types/strapi";
 import { richTextToExcerpt } from "./rich-text";
 
 // Vite (y por lo tanto TanStack Start) inyecta automáticamente las
@@ -14,6 +15,39 @@ export function getStrapiMediaUrl(url?: string | null): string {
   if (!url) return "/placeholder-articulo.jpg";
   if (url.startsWith("http")) return url;
   return `${STRAPI_URL}${url}`;
+}
+
+export interface StrapiImageSources {
+  src: string;
+  srcSet?: string;
+}
+
+/**
+ * Arma `src` + `srcSet` a partir de los formatos redimensionados que Strapi
+ * genera (small/medium/large) más el original, para que el navegador descargue
+ * solo el tamaño que necesita en vez del archivo completo. `preferred` define
+ * el `src` de respaldo para navegadores que ignoran `srcSet`.
+ */
+export function getStrapiImageSources(
+  media: StrapiMedia | null | undefined,
+  preferred: StrapiMediaFormatName = "medium",
+): StrapiImageSources {
+  if (!media?.url) return { src: getStrapiMediaUrl(null) };
+
+  const candidates: { url: string; width: number }[] = [];
+  for (const [name, format] of Object.entries(media.formats ?? {})) {
+    // El thumbnail (~245px) es demasiado chico para servir de imagen principal.
+    if (name !== "thumbnail" && format) candidates.push(format);
+  }
+  if (media.width) candidates.push({ url: media.url, width: media.width });
+
+  const srcSet = candidates
+    .sort((a, b) => a.width - b.width)
+    .map((c) => `${getStrapiMediaUrl(c.url)} ${c.width}w`)
+    .join(", ");
+
+  const src = getStrapiMediaUrl(media.formats?.[preferred]?.url ?? media.url);
+  return srcSet ? { src, srcSet } : { src };
 }
 
 /**

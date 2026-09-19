@@ -52,14 +52,20 @@ export function HeroCarousel({ slides, label }: HeroCarouselProps) {
       >
         <Carousel setApi={setApi} opts={{ loop: true }}>
           <CarouselContent className="-ml-0">
-            {slides.map((slide) => (
+            {slides.map((slide, index) => (
               <CarouselItem key={slide.id} className="pl-0">
                 <div className="relative aspect-[0.7] w-full bg-white-smoke">
                   <img
                     src={slide.image}
+                    srcSet={slide.srcSet}
+                    sizes="320px"
                     alt={slide.alt}
-                    loading="lazy"
-                    className="h-full w-full object-fill"
+                    // La primera slide es candidata a LCP: se carga ya y con prioridad.
+                    // Las demás quedan fuera de pantalla, así que sí pueden ser lazy.
+                    loading={index === 0 ? "eager" : "lazy"}
+                    fetchPriority={index === 0 ? "high" : "auto"}
+                    decoding="async"
+                    className="h-full w-full object-cover"
                   />
 
                   {(slide.departureTime || slide.location) && (

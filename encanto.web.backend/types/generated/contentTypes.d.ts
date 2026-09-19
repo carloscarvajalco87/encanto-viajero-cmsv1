@@ -657,6 +657,7 @@ export interface ApiHeroHero extends Struct.SingleTypeSchema {
     backgroundImage: Schema.Attribute.Media<
       'images' | 'files' | 'videos' | 'audios'
     >;
+    backgroundImageMobile: Schema.Attribute.Media<'images'>;
     backgroundType: Schema.Attribute.Enumeration<
       ['image', 'color', 'gradient']
     > &

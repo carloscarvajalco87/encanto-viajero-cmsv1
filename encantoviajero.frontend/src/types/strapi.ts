@@ -12,7 +12,19 @@ export interface StrapiMedia {
   alternativeText: string | null;
   width: number | null;
   height: number | null;
+  /** Versiones redimensionadas que Strapi genera al subir una imagen. */
+  formats?: StrapiMediaFormats | null;
 }
+
+export type StrapiMediaFormatName = "thumbnail" | "small" | "medium" | "large";
+
+export interface StrapiMediaFormat {
+  url: string;
+  width: number;
+  height: number;
+}
+
+export type StrapiMediaFormats = Partial<Record<StrapiMediaFormatName, StrapiMediaFormat>>;
 
 export interface StrapiListResponse<T> {
   data: T[];
