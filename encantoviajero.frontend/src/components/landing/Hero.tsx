@@ -3,7 +3,8 @@ import { MessageCircle, ShieldCheck, Users, Star, type LucideIcon } from "lucide
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { whatsappLink } from "@/lib/site";
-import { useHero } from "@/hooks/use-hero";
+import { useHero, type HeroInitialData } from "@/hooks/use-hero";
+import { HERO_FALLBACK } from "@/lib/hero-fallback";
 import { HeroCarousel } from "@/components/landing/HeroCarousel";
 import type { HeroBackground } from "@/lib/hero";
 import type { TrustIcon } from "@/types/hero";
@@ -28,16 +29,16 @@ function backgroundStyle(background: HeroBackground): CSSProperties {
 
 function HeroSkeleton() {
   return (
-    <section id="top" className="relative isolate overflow-hidden bg-muted" style={{ backgroundImage: `linear-gradient(to top, rgb(21, 98, 133) 6%, rgb(18, 34, 70) 45%)` }}>
+    <section id="top" className="relative isolate overflow-hidden bg-muted text-primary-foreground" style={{ backgroundImage: `linear-gradient(to top, rgb(21, 98, 133) 6%, rgb(18, 34, 70) 45%)` }}>
       <div className="mx-auto grid min-h-[75vh] max-w-8xl grid-cols-1 items-center gap-12 px-5 pb-14 pt-4 lg:grid-cols-[1.4fr_360px] md:pt-24">
         <div className="flex flex-col justify-end gap-5">
           <Skeleton className="h-7 w-56 rounded-full" theme="secondary/40" />
 
-          <div className="space-y-3">
-            <Skeleton className="h-10 w-full max-w-2xl" theme="secondary/40" />
-            <Skeleton className="h-10 w-full max-w-xl" theme="secondary/40" />
-            <Skeleton className="h-10 w-2/3 max-w-md" theme="secondary/40" />
-          </div>
+          {/* Respaldo SEO: si el loader no pudo traer el hero de Strapi, el HTML del
+              servidor igual incluye un <h1> real en lugar de solo bloques grises. */}
+          <h1 className="max-w-4xl text-balance-tight font-display text-4xl leading-[1.05] sm:text-5xl md:text-6xl">
+            {HERO_FALLBACK.title}
+          </h1>
 
           <div className="space-y-2">
             <Skeleton className="h-4 w-full max-w-2xl" theme="secondary/40" />
@@ -70,8 +71,8 @@ function HeroSkeleton() {
   );
 }
 
-export function Hero() {
-  const { content, slides, isLoading } = useHero();
+export function Hero({ initialData }: { initialData?: HeroInitialData }) {
+  const { content, slides, isLoading } = useHero(initialData);
 
   if (isLoading) {
     return <HeroSkeleton />;

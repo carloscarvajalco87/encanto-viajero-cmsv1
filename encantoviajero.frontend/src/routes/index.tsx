@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { SiteHeader } from "@/components/landing/SiteHeader";
 import { Hero } from "@/components/landing/Hero";
+import { fetchHero, fetchHeroSlides } from "@/hooks/use-hero";
 import { Experiencias } from "@/components/landing/Experiencias";
 import { Emocional, PorQueElegirnos } from "@/components/landing/Emocional";
 import { Opiniones } from "@/components/landing/Opiniones";
@@ -23,15 +24,25 @@ export const Route = createFileRoute("/")({
     ],
     links: [{ rel: "canonical", href: "https://www.mundoencantoviajero.com/" }],
   }),
+  // Precarga el hero en el servidor para que el <h1> llegue en el HTML inicial.
+  // Si Strapi falla, el campo queda undefined y Hero cae al respaldo.
+  loader: async () => {
+    const [hero, slides] = await Promise.all([
+      fetchHero().catch(() => undefined),
+      fetchHeroSlides().catch(() => undefined),
+    ]);
+    return { hero, slides };
+  },
   component: Index,
 });
 
 function Index() {
+  const heroData = Route.useLoaderData();
   return (
     <div className="min-h-screen bg-background">
       <SiteHeader />
       <main>
-        <Hero />
+        <Hero initialData={heroData} />
         <Experiencias />
         <Emocional />
         <PorQueElegirnos />

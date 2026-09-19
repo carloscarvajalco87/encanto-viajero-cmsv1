@@ -10,9 +10,13 @@ import { HERO_FALLBACK, HERO_SLIDES_FALLBACK } from "@/lib/hero-fallback";
 import type { Hero, HeroSlide } from "@/types/hero";
 import type { StrapiListResponse, StrapiSingleResponse } from "@/types/strapi";
 
-async function fetchHero(): Promise<Hero> {
+// Tope de espera para que un Strapi lento no bloquee el render en el servidor.
+const FETCH_TIMEOUT_MS = 4000;
+
+export async function fetchHero(): Promise<Hero> {
   const res = await fetch(HERO_ENDPOINT, {
     headers: { "Content-Type": "application/json" },
+    signal: AbortSignal.timeout(FETCH_TIMEOUT_MS),
   });
 
   if (!res.ok) {
@@ -23,9 +27,10 @@ async function fetchHero(): Promise<Hero> {
   return json.data;
 }
 
-async function fetchHeroSlides(): Promise<HeroSlide[]> {
+export async function fetchHeroSlides(): Promise<HeroSlide[]> {
   const res = await fetch(HERO_SLIDES_ENDPOINT, {
     headers: { "Content-Type": "application/json" },
+    signal: AbortSignal.timeout(FETCH_TIMEOUT_MS),
   });
 
   if (!res.ok) {
@@ -36,17 +41,26 @@ async function fetchHeroSlides(): Promise<HeroSlide[]> {
   return json.data ?? [];
 }
 
-export function useHero() {
+// Datos precargados por el loader de la ruta, para que el SSR ya incluya el hero
+// (y su <h1>) en el HTML inicial. Cada campo es undefined si su fetch falló.
+export type HeroInitialData = {
+  hero?: Hero | undefined;
+  slides?: HeroSlide[] | undefined;
+};
+
+export function useHero(initialData?: HeroInitialData) {
   const heroQuery = useQuery({
     queryKey: ["hero"],
     queryFn: fetchHero,
     staleTime: 5 * 60_000,
+    initialData: initialData?.hero,
   });
 
   const slidesQuery = useQuery({
     queryKey: ["hero-slides"],
     queryFn: fetchHeroSlides,
     staleTime: 5 * 60_000,
+    initialData: initialData?.slides,
   });
 
   // El hero es lo primero que se ve del sitio: mientras carga, o si algo

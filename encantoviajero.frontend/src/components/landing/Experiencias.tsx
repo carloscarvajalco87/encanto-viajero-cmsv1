@@ -69,7 +69,7 @@ export function Experiencias() {
         </h2>
         <p className="mt-4 text-muted-foreground">
           Cada salida se ajusta a tu grupo: fechas, ritmo, comidas y hasta las paradas para las
-          fotos. Elegí la que más te llame y la armamos juntos por WhatsApp.
+          fotos. Elige la que más te guste y la armamos juntos por WhatsApp.
         </p>
       </div>
 

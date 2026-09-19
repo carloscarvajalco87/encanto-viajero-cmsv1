@@ -4,11 +4,8 @@ import type { HeroContent, HeroSlideView } from "@/lib/hero";
 
 export const HERO_FALLBACK: HeroContent = {
   badgeLabel: "Grupos de máximo 12 personas",
-  title: "Desconectá del ruido y volvé a sentir el campo, el agua y el silencio.",
-  description:
-    "Diseñamos excursiones y escapadas rurales 100% a tu medida: vos elegís el ritmo, nosotros " +
-    "nos ocupamos de todo. Sin micros llenos, sin filas, sin apuros. Solo tu grupo, un guía " +
-    "local que conoce cada sendero y lugares que las agencias masivas nunca te van a mostrar.",
+  title: "Viaja y descubre las maravillas de Colombia y el mundo con Encanto Viajero",
+  description: "Diseñamos excursiones, tours grupales 100% a tu medida: tú eliges el ritmo, nosotros nos ocupamos de todo, sin afanes. ",
   primaryButtonLabel: "Cotizar mi viaje por WhatsApp",
   primaryButtonMessage:
     "¡Hola Encanto Viajero! Quiero armar mi excursión personalizada. ¿Me ayudan con una cotización?",
@@ -30,7 +27,7 @@ export const HERO_SLIDES_FALLBACK: HeroSlideView[] = [
     alt: "Grupo de viajeros en una excursión rural",
     departureTime: "6:00 A.M.",
     location: "Parque Explora",
-    dates: "Consultá próximas salidas por WhatsApp",
+    dates: "Consulta próximas salidas por WhatsApp",
   },
   {
     id: 1,
@@ -38,6 +35,6 @@ export const HERO_SLIDES_FALLBACK: HeroSlideView[] = [
     alt: "Grupo de viajeros en una excursión rural",
     departureTime: "6:00 A.M.",
     location: "Parque Explora",
-    dates: "Consultá próximas salidas por WhatsApp",
+    dates: "Consulta próximas salidas por WhatsApp",
   },
 ];
