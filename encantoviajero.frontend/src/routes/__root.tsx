@@ -11,6 +11,8 @@ import {
 import type { ReactNode } from "react";
 
 import appCss from "../styles.css?url";
+import fraunces from "@fontsource-variable/fraunces/files/fraunces-latin-wght-normal.woff2?url";
+import manrope from "@fontsource-variable/manrope/files/manrope-latin-wght-normal.woff2?url";
 
 const GTM_ID = import.meta.env.VITE_GTM_ID ?? "GTM-WNB2XHXC";
 
@@ -86,12 +88,11 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "twitter:site", content: "@EncantoViajero" },
     ],
     links: [
-      { rel: "preconnect", href: "https://fonts.googleapis.com" },
-      { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
-      {
-        rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Manrope:wght@400;500;600;700&display=swap",
-      },
+      // Fuentes autoalojadas: se precargan los subconjuntos latinos (los que usa el
+      // español) para que bajen en paralelo con el CSS. crossOrigin es obligatorio
+      // en preload de fuentes, aunque sean del mismo origen.
+      { rel: "preload", as: "font", type: "font/woff2", href: fraunces, crossOrigin: "anonymous" },
+      { rel: "preload", as: "font", type: "font/woff2", href: manrope, crossOrigin: "anonymous" },
       {
         rel: "stylesheet",
         href: appCss,
@@ -107,7 +108,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 
 function RootShell({ children }: { children: ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="es">
       <head>
         <script
           dangerouslySetInnerHTML={{
